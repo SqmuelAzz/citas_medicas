@@ -56,3 +56,15 @@ class Cita:
             mensaje,
             medio,
             estado))
+        
+    def cargar_una_cita(self,id):
+        query = """SELECT m.nombre
+                    FROM citas c
+                    INNER JOIN  medicos m
+                    ON c.id_medico = m.id 
+                    WHERE c.id = ?"""
+        cita = self.db.execute_query(query,(id,))
+        if cita:
+            return cita[0]
+        else: 
+            return None

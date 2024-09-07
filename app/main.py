@@ -2,10 +2,14 @@ import os
 from paciente import Paciente
 from medico import Medico
 from cita import Cita
+from horario import Horario
+from admnistrador import Administrador
 
 get_paciente = Paciente()
 get_medico = Medico()
 get_cita = Cita()
+get_horario = Horario()
+get_administrdor = Administrador()
 
 
 
@@ -83,7 +87,7 @@ def menu_pacientes():
         print("    (2) Agendar_cita")
         print("    (3) Cancelar cita")
         print("    (4) Enviar recordatorio")
-        print("    (9) Salir")
+        print("    (5) Salir")
 
         opcion = int(input("Opcion: "))
 
@@ -91,7 +95,7 @@ def menu_pacientes():
             os.system("cls")
             print("Agregar paciente")
             datos_paciente = pedir_datos_pacientes()
-            #print(datos_paciente)
+            
             get_paciente.crear_paciente(datos_paciente)
         elif opcion == 2:
             print("Agendar citas")
@@ -108,7 +112,84 @@ def menu_pacientes():
             recordatorio = pedir_datos_recordatorio()
             get_cita.crear_notificacion(recordatorio)
 
-        elif opcion == 9:
+        elif opcion == 5:
+            continuar = False
+            break
+        else:
+            print("Debe elegir una opcion entre 1 y 9")
+        input("Presione una tecla para continmuar...")
+        os.system("cls")
+
+#Medicos
+def pedir_datos_medico():
+    nombre = input("Digite el nombre completo del medico: ")
+    especialidad = input("Digite la especialidad del medico: ")
+    telefono = input("Digite el telefono celular del medico: ")
+    email = input("Digite el correo electronico del medico: ")
+    return (nombre,especialidad,telefono,email)
+
+def pedir_datos_agenda():
+    listar_medicos = get_medico.mostrar_medicos()
+    print("Medicos disponibles")
+    for medico in listar_medicos:
+        print(f"{medico[0]} : {medico[1]}")
+    print()
+    resp = input("Desea crear la agenda del medico?, <S/N>: ")
+    if resp.upper() == 'S':
+        dia = input("Dgite el nombre deldia (Lunes - Viernes): ")
+        hora_inicio = input("Digite la hora de inicio: ")
+        hora_fin = input("Digite la hora de finalizacion: ")
+        idMedico = input("Digite el id del medico: ")
+        return (dia,hora_inicio,hora_fin,idMedico)
+    else:
+        return False
+
+def pedir_datos_medico_cancelar_citas():
+    listado_citas = get_medico.mostrar_citas_medicas()
+    print()
+    #print(listado_citas)
+    for cita in listado_citas:
+        print(f"ID Cita: {cita[0]}| Fecha: {cita[1]}| Estado: {cita[2]}| Medico:  {cita[4]}")
+    print()
+    resp = input("Desea cancelar una cita?, <S/N>: ")
+    if resp.upper() == 'S':
+        idCita = input("Dgite el id de la cita a cancelar: ")
+        medico = get_cita.cargar_una_cita(idCita)
+        motivo = input("Digite el moitvo de cancelacion: ")
+        mensaje = f"Cita cancelada por el medico {medico[0]}"
+        return (idCita,motivo,mensaje)
+    else:
+        return False
+
+
+def menu_medicos():
+    os.system("cls")
+    continuar = True 
+    while continuar:
+        print("\n\nSeleccione una Opcion ")
+        print("    (1) Agregar medico")
+        print("    (2) Agregar disponibilidad")
+        print("    (3) Cancelar cita")
+        print("    (4) Salir")
+
+        opcion = int(input("Opcion: "))
+
+        if opcion == 1:
+            os.system("cls")
+            print("Agregar medico")
+            datos_medico = pedir_datos_medico()
+            get_medico.crear_medico(datos_medico)
+        elif opcion == 2:
+            print("Agendar disponibilidad")
+            datos_agenda = pedir_datos_agenda()
+            if datos_agenda:
+                get_horario.crear_agenda(datos_agenda)
+        elif opcion == 3:
+            print("Cancelar citas")
+            cancelar_citas = pedir_datos_medico_cancelar_citas()
+            if cancelar_citas:
+                get_medico.cancelar_cita(cancelar_citas)
+        elif opcion == 4:
             continuar = False
             break
         else:
@@ -117,12 +198,59 @@ def menu_pacientes():
         os.system("cls")
 
 
+
+#Administradores
+def pedir_datos_adm():
+    nombre = input("Digite el nombre completo: ")
+    email = input("Digite la email: ")
+    telefono = input("Digite el telefono: ")
+    cargo = input("Digite el cargo: ")
+    return (nombre,email,telefono,cargo)
+
+
+def menu_administradores():
+    os.system("cls")
+    continuar = True 
+    while continuar:
+        print("\n\nSeleccione una Opcion ")
+        print("    (1) Agregar administrador")
+        print("    (2) Genrar reportes")
+        print("    (3) Gestionar disponibiidad medicos")
+        print("    (4) Salir")
+
+        opcion = int(input("Opcion: "))
+
+        if opcion == 1:
+            os.system("cls")
+            print("Agregar Administrador")
+            datos_adm = pedir_datos_adm()
+            get_administrdor.crear_administrador(datos_adm)
+        elif opcion == 2:
+            print("Agendar disponibilidad")
+            datos_agenda = pedir_datos_agenda()
+            if datos_agenda:
+                get_horario.crear_agenda(datos_agenda)
+        elif opcion == 3:
+            print("Cancelar citas")
+            cancelar_citas = pedir_datos_medico_cancelar_citas()
+            if cancelar_citas:
+                get_medico.cancelar_cita(cancelar_citas)
+        elif opcion == 4:
+            continuar = False
+            break
+        else:
+            print("Debe elegir una opcion entre 1 y 9")
+        input("Presione una tecla para continmuar...")
+        os.system("cls")
+
 def menu_principal():
     os.system("cls")
     continuar = True 
     while continuar:
         print("\n\nSeleccione una Opcion ")
         print("    (1) Gestion de Pacientes")
+        print("    (2) Gestion de Medicos")
+        print("    (3) Gestion de Administradores")
 
 
 
@@ -134,6 +262,14 @@ def menu_principal():
             os.system("cls")
             print("Manejo de pacientes")
             menu_pacientes()
+        if opcion == 2:
+            os.system("cls")
+            print("Manejo de Medicos")
+            menu_medicos()
+        if opcion == 3:
+            os.system("cls")
+            print("Manejo de Administradores")
+            menu_administradores()
         elif opcion == 9:
             continuar = False
             break

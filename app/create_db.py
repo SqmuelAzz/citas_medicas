@@ -30,9 +30,9 @@ class Create_db:
 
             print()
             print("Creando tabala medicos ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS medicos;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS medicos;
+            #""")
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS medicos(
@@ -66,9 +66,9 @@ class Create_db:
 
             print()
             print("Creando tabala horario ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS horario;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS horario;
+            #""")
             
             #hora_inicio: '14:30:00'
             self.cursor.execute("""
@@ -92,7 +92,9 @@ class Create_db:
             CREATE TABLE IF NOT EXISTS administrador(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
-                book_id INTEGER NOT NULL,
+                email TEXT NOT NULL,
+                telefono TEXT NOT NULL,
+                cargo TEXT NOT NULL,               
                 fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
             """)
