@@ -9,6 +9,5 @@
 8.	El sistema debe permitir la notificación a los pacientes sobre disponibilidad de cupos en caso de cancelaciones
 9.	El sistema debe generar reportes sobre los médicos mas demandados y las especialidades mas solicitadas
 10.	El sistema debe generar reporte de tendencias de citas y análisis de cancelaciones para calcular el porcentaje de ausentismo
-11.	El sistema debe permitir exportar a Excel los reportes
-12.	El sistema debe permitir actualizar y mostrar la disponibilidad de los médicos
-13.	El sistema debe ser fácil de manejar para los usuarios para agendar o cancelar citas
+11.	El sistema debe permitir actualizar y mostrar la disponibilidad de los médicos
+12.	El sistema debe ser fácil de manejar para los usuarios para agendar o cancelar citas

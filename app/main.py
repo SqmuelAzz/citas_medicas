@@ -248,7 +248,7 @@ def menu_administradores():
             continuar = False
             break
         else:
-            print("Debe elegir una opcion entre 1 y 9")
+            print("Debe elegir una opcion entre 1 y 4")
         input("Presione una tecla para continmuar...")
         os.system("cls")
 
@@ -260,10 +260,7 @@ def menu_principal():
         print("    (1) Gestion de Pacientes")
         print("    (2) Gestion de Medicos")
         print("    (3) Gestion de Administradores")
-
-
-
-        print("    (9) Salir")
+        print("    (4) Salir")
 
         opcion = int(input("Opcion: "))
 
@@ -279,11 +276,11 @@ def menu_principal():
             os.system("cls")
             print("Manejo de Administradores")
             menu_administradores()
-        elif opcion == 9:
+        elif opcion == 4:
             continuar = False
             break
         else:
-            print("Debe elegir una opcion entre 1 y 9")
+            print("Debe elegir una opcion entre 1 y 4")
         input("Presione una tecla para continmuar...")
         os.system("cls")
 

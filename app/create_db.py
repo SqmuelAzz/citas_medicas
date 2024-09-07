@@ -12,9 +12,9 @@ class Create_db:
             print("Creando estructura de la base de datos BIBLIOTECA")
             print()
             print("Creando tabala usuarios ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS pacientes;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS pacientes;
+            """)
 
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS pacientes(
@@ -30,9 +30,9 @@ class Create_db:
 
             print()
             print("Creando tabala medicos ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS medicos;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS medicos;
+            """)
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS medicos(
@@ -45,9 +45,9 @@ class Create_db:
             """)
             print()
             print("Creando tabala citas ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS citas;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS citas;
+            """)
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS citas(
@@ -66,9 +66,9 @@ class Create_db:
 
             print()
             print("Creando tabala horario ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS horario;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS horario;
+            """)
             
             #hora_inicio: '14:30:00'
             self.cursor.execute("""
@@ -84,9 +84,9 @@ class Create_db:
 
             print()
             print("Creando tabala administrador ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS administrador;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS administrador;
+            """)
             
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS administrador(
@@ -101,9 +101,9 @@ class Create_db:
 
             print()
             print("Creando tabala notificaciones ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS notificaciones;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS notificaciones;
+            """)
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS notificaciones(
