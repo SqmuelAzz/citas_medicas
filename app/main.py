@@ -4,12 +4,14 @@ from medico import Medico
 from cita import Cita
 from horario import Horario
 from admnistrador import Administrador
+from reportes import Reporte
 
 get_paciente = Paciente()
 get_medico = Medico()
 get_cita = Cita()
 get_horario = Horario()
 get_administrdor = Administrador()
+get_reportes = Reporte()
 
 
 
@@ -207,15 +209,15 @@ def pedir_datos_adm():
     cargo = input("Digite el cargo: ")
     return (nombre,email,telefono,cargo)
 
-
 def menu_administradores():
     os.system("cls")
-    continuar = True 
+    continuar = True
+    idAdm = 1 
     while continuar:
         print("\n\nSeleccione una Opcion ")
         print("    (1) Agregar administrador")
-        print("    (2) Genrar reportes")
-        print("    (3) Gestionar disponibiidad medicos")
+        print("    (2) Reporce citas programadas")
+        print("    (3) Reporte citas canceladas")
         print("    (4) Salir")
 
         opcion = int(input("Opcion: "))
@@ -226,15 +228,22 @@ def menu_administradores():
             datos_adm = pedir_datos_adm()
             get_administrdor.crear_administrador(datos_adm)
         elif opcion == 2:
-            print("Agendar disponibilidad")
-            datos_agenda = pedir_datos_agenda()
-            if datos_agenda:
-                get_horario.crear_agenda(datos_agenda)
+            print("Reporte citas programadas")
+            reporte_citas_programadas = get_administrdor.generar_reporte_citas_programadas()
+            for rep in reporte_citas_programadas:
+                print(F"Fecha: {rep[0]} | Paciente: {rep[1]} | Medico: {rep[2]} | Especialidad: {rep[3]} | Estado: {rep[4]}")
+                get_reportes.guardar_reporte_citas_programadas(idAdm,'ReporteCitasProgramadas',rep[0],rep[1],rep[2],rep[3],rep[4])
+            print()
+            #rep_citas = (idAdm,rep[0],rep[1],rep[2],rep[3],rep[4])
+            
         elif opcion == 3:
-            print("Cancelar citas")
-            cancelar_citas = pedir_datos_medico_cancelar_citas()
-            if cancelar_citas:
-                get_medico.cancelar_cita(cancelar_citas)
+            print("Reporte citas canceladas")
+            citas_canceladas = get_administrdor.generar_reporte_citas_canceladas()
+            for rep in citas_canceladas:
+                print(F"Fecha: {rep[0]} | Paciente: {rep[1]} | Medico: {rep[2]} | Modifico: {rep[3]} | Motivo: {rep[4]}")
+                get_reportes.guardar_reporte_citas_canceladas(idAdm,'ReporteCitasCanceladas',rep[0],rep[1],rep[2],rep[3],rep[4])
+            print()
+            
         elif opcion == 4:
             continuar = False
             break

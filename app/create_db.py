@@ -84,9 +84,9 @@ class Create_db:
 
             print()
             print("Creando tabala administrador ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS administrador;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS administrador;
+            #""")
             
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS administrador(
@@ -122,15 +122,21 @@ class Create_db:
             print()
             print("Creando tabala reportes ...")
             self.cursor.execute("""
-                DROP TABLE IF EXISTS reservations;
+                DROP TABLE IF EXISTS reportes;
             """)
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS reportes(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 id_adm INTEGER NOT NULL,
-                tipo_reporte TEXT NOT NULL,
-                contenido TEXT NOT NULL,
+                prg_envio TEXT NOT NULL,
+                fecha TEXT NOT NULL,
+                paciente TEXT NOT NULL,
+                medico TEXT NOT NULL,
+                especialidad TEXT,
+                estado TEXT,
+                modifico TEXT NOT NULL DEFAULT 'N/A',
+                motivo TEXT NOT NULL DEFAULT 'N/A',
                 fecha_generacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY(id_adm) REFERENCES administrador(id)
                 );
