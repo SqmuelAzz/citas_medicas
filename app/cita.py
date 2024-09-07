@@ -33,13 +33,26 @@ class Cita:
         query = "UPDATE citas SET estado = 'Cancelada' WHERE id = ? "
         self.db.execute_query(query, (id,))
     
-    def notificar_cita_paciente(self,id):
+    def notificar_cita_paciente(self,idCita):
         query = """SELECT c.id,c.fecha,c.id_paciente,p.nombre,p.email,p.telefono,p.preferencia_notificacion
                     FROM citas c
                     INNER JOIN  pacientes p
-                    ON c.id_paciente = p.id'"""
-        citas = self.db.execute_query(query)
+                    ON c.id_paciente = p.id 
+                    WHERE c.id = ?"""
+        citas = self.db.execute_query(query,(idCita,))
         if citas:
-            return citas
+            return citas[0]
         else: 
-            return None 
+            return None
+    
+    def crear_notificacion(self,datos):
+        idCita,idPaciente,mensaje,medio,estado = datos
+        query= """INSERT INTO notificaciones (
+            id_paciente,id_cita,mensaje,medio,estado) 
+            VALUES(?,?,?,?,?)"""
+        self.db.execute_query(query, (
+            idPaciente,
+            idCita,
+            mensaje,
+            medio,
+            estado))

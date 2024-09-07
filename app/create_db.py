@@ -30,24 +30,24 @@ class Create_db:
 
             print()
             print("Creando tabala medicos ...")
-            #self.cursor.execute("""
-            #    DROP TABLE IF EXISTS medicos;
-            #""")
+            self.cursor.execute("""
+                DROP TABLE IF EXISTS medicos;
+            """)
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS medicos(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombre TEXT NOT NULL,
                 especialidad TEXT NOT NULL,
-                id_agenda INTEGER NOT NULL,
-                id_disponibilidad INTEGER NOT NULL
+                telefono TEXT NOT NULL,
+                email TEXT
                 );
             """)
             print()
             print("Creando tabala citas ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS citas;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS citas;
+            #""")
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS citas(
@@ -99,9 +99,9 @@ class Create_db:
 
             print()
             print("Creando tabala notificaciones ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS notificaciones;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS notificaciones;
+            #""")
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS notificaciones(

@@ -55,14 +55,24 @@ def pedir_datos_cancelar():
         return False
 
 def pedir_datos_recordatorio():
-    listar_citas = get_cita.notificar_cita_paciente()
+    listar_citas = get_cita.mostrar_citas()
     print("Citas pendientes")
     for cita in listar_citas:
-        print(f"ID Cita: {cita[0]},  Paciente: {cita[1]}, Medico: {cita[2]}, Motivo consulta: {cita[3]}")
+        print(f"ID Cita: {cita[0]} |  Paciente: {cita[1]}")
     print()
     idCita = input("Dgite el id de la cita a notificar: ")
-    return idCita
-      
+    lst_citas = get_cita.notificar_cita_paciente(idCita)
+    #print(lst_citas)
+    if lst_citas[6] == 'email':
+        tipo = "correo electronico"
+        medio = lst_citas[4]
+    else:
+        tipo = "celular"
+        medio = lst_citas[5]
+    mensaje = f"Señor(a) <<{lst_citas[3]}>> se le recuerda su cita medica para la fecha <<{lst_citas[1]}>>, la cual a sido enviada a su {tipo} <<{medio}>>, gracias por su puntual asistencia."
+    #print(mensaje)
+    return (lst_citas[0],lst_citas[2],mensaje,medio,"enviada")
+    
 
 def menu_pacientes():
     os.system("cls")
@@ -96,7 +106,7 @@ def menu_pacientes():
         elif opcion == 4:
             print("Enviar recordatorio")
             recordatorio = pedir_datos_recordatorio()
-            print(recordatorio)
+            get_cita.crear_notificacion(recordatorio)
 
         elif opcion == 9:
             continuar = False
