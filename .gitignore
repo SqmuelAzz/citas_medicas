@@ -4,3 +4,6 @@ __pycache__/
 
 #Ignore virtual environment
 /env
+
+#Igoner DB
+citas_medicas.sqlite3
