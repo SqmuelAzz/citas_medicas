@@ -12,9 +12,9 @@ class Create_db:
             print("Creando estructura de la base de datos BIBLIOTECA")
             print()
             print("Creando tabala usuarios ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS pacientes;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS pacientes;
+            #""")
 
             self.cursor.execute("""
                 CREATE TABLE IF NOT EXISTS pacientes(
@@ -30,9 +30,9 @@ class Create_db:
 
             print()
             print("Creando tabala medicos ...")
-            self.cursor.execute("""
-                DROP TABLE IF EXISTS medicos;
-            """)
+            #self.cursor.execute("""
+            #    DROP TABLE IF EXISTS medicos;
+            #""")
 
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS medicos(
@@ -56,7 +56,7 @@ class Create_db:
                 id_paciente INTEGER NOT NULL,
                 id_medico INTEGER NOT NULL,
                 detalle TEXT,
-                estado TEXT NOT NULL,
+                estado TEXT NOT NULL DEFAULT 'pendiente',
                 duracion INTEGER NOT NULL,
                 fecha_creacion date DEFAULT (DATE('now')),
                 FOREIGN KEY (id_paciente) REFERENCES pacientes(id),
@@ -87,7 +87,7 @@ class Create_db:
             self.cursor.execute("""
                 DROP TABLE IF EXISTS administrador;
             """)
-            #loan_type: domiciliario, sala
+            
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS administrador(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -103,7 +103,6 @@ class Create_db:
                 DROP TABLE IF EXISTS notificaciones;
             """)
 
-            #state pending,paid
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS notificaciones(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -124,7 +123,6 @@ class Create_db:
                 DROP TABLE IF EXISTS reservations;
             """)
 
-            #state: active, completed, cancelled
             self.cursor.execute("""
             CREATE TABLE IF NOT EXISTS reportes(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
